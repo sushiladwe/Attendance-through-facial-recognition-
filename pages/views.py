@@ -1,0 +1,96 @@
+from django.shortcuts import render,redirect
+from django.http import HttpResponseRedirect
+from django.contrib.auth.models import User
+from django.contrib.auth import authenticate, login
+from pages.models import UserProfile
+from django.contrib import messages
+import os
+# import imutils
+import pickle
+import time
+# import cv2
+
+import base64
+import io
+from PIL import Image
+import json
+from django.urls import path, include
+
+import face_recognition
+import numpy as np
+import cv2 
+
+
+def loginuser(request):
+        
+        if request.method=="POST":
+                username = request.POST.get('username')
+                password = request.POST.get('password')
+        
+                # print(username)
+                user = authenticate(username=username,password=password)
+                if user is not None:
+                        raw_face = user.user_profile.face_data
+                        raw_face = np.array(json.loads(raw_face))
+
+                        face_input = request.POST.get('encodings')
+                        encodings = json.dumps(get_face_encoding_from_base64(face_input))
+                        raw_encod = np.array(json.loads(encodings))
+                        match = face_recognition.compare_faces([raw_face],raw_encod)       
+                        if True in match:
+                                login(request,user)
+                                messages.success(request,"Attendance marked successfuly")
+                                return redirect('profile')
+                        else:
+                                messages.error(request, "Face is not recognized!!")
+                                return redirect('home')
+                else:
+                        messages.error(request, "Invalid Credentials!!")
+                        return redirect('home') 
+                
+        return render(request,'login.html') 
+
+      
+def home(request):
+   return render(request, 'home.html', {})
+
+def register(request):
+        if request.method=="POST":
+                username=request.POST.get('usernameup')
+                password=request.POST.get('passwordup')
+                repassword=request.POST.get('repasswordup')
+                # print(username,password)
+               
+                if password!=repassword:
+                        messages.error(request, "Password dosen't match")
+                        return redirect('home')
+                
+                face_input = request.POST.get('encodings')
+                encodings = json.dumps(get_face_encoding_from_base64(face_input))
+                
+                user = User.objects.create_user(username,username,password)
+                user_profile = UserProfile.objects.create(user = user, face_data = encodings)
+                
+                return redirect('login')
+                
+                
+        return render(request,'register.html')
+                            
+def profile(request):
+        return render(request,'profile.html',{})
+
+def alert(request):
+        return render(request,'registration/alert.html')
+
+
+def get_face_encoding_from_base64(base64String):
+    
+    buf = io.BytesIO(base64.b64decode(base64String))
+    process = face_recognition.load_image_file(buf)
+    image_encoding = face_recognition.face_encodings(process)
+
+    # print(np.shape(image_encoding[0]))
+
+    return image_encoding[0].tolist()
+
+        

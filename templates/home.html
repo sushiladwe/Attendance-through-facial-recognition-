@@ -1,0 +1,16 @@
+{% extends 'common.html' %} {% load static %} {% block head %}
+<title>Home</title>
+{% endblock %} {% block content %}
+
+
+
+<div class="butt" style="text-align: center; padding-top: 250px">
+  <a class="btn btn-outline-warning" href="{% url 'base' %}" role="button"
+    >Log In</a
+  >
+  <a class="btn btn-outline-warning" href="{% url 'register' %}" role="button"
+    >Sign Up</a
+  >
+</div>
+
+{% endblock %}
