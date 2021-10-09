@@ -25,3 +25,11 @@ class UserProfile(models.Model):
 #         user_profile=UserProfile.objects.get_or_create(user=kwargs['instance'])
 
 # post_save.connect(create_profile,sender=User)
+
+#changed
+class Attendance(models.Model):
+    username = models.CharField(max_length=122)
+    a_time = models.DateTimeField()
+ 
+    def __str__(self):
+        return self.username 

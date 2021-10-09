@@ -2,13 +2,13 @@ from django.shortcuts import render,redirect
 from django.http import HttpResponseRedirect
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
-from pages.models import UserProfile
+from pages.models import UserProfile,Attendance
+from datetime import datetime
+
 from django.contrib import messages
 import os
-# import imutils
 import pickle
 import time
-# import cv2
 
 import base64
 import io
@@ -38,6 +38,11 @@ def loginuser(request):
                         raw_encod = np.array(json.loads(encodings))
                         match = face_recognition.compare_faces([raw_face],raw_encod)       
                         if True in match:
+                                #changed  
+                                if Attendance.objects.filter(username = username).exists(): 
+                                        Attendance.objects.filter(username=username).update(a_time=datetime.now())     
+                                else:
+                                        Attendance.objects.create(username = username, a_time = datetime.now())
                                 login(request,user)
                                 messages.success(request,"Attendance marked successfuly")
                                 return redirect('profile')
@@ -59,7 +64,9 @@ def register(request):
                 username=request.POST.get('usernameup')
                 password=request.POST.get('passwordup')
                 repassword=request.POST.get('repasswordup')
-                # print(username,password)
+                if User.objects.filter(email=username).exists():
+                        messages.warning(request, "User already exists, try with another username")
+                        return redirect('home')
                
                 if password!=repassword:
                         messages.error(request, "Password dosen't match")
@@ -71,7 +78,7 @@ def register(request):
                 user = User.objects.create_user(username,username,password)
                 user_profile = UserProfile.objects.create(user = user, face_data = encodings)
                 
-                return redirect('login')
+                return render(request,'login.html')
                 
                 
         return render(request,'register.html')
