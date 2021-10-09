@@ -57,7 +57,7 @@ def loginuser(request):
 
       
 def home(request):
-   return render(request, 'home.html', {})
+   return render(request, 'home.html')
 
 def register(request):
         if request.method=="POST":
@@ -78,7 +78,7 @@ def register(request):
                 user = User.objects.create_user(username,username,password)
                 user_profile = UserProfile.objects.create(user = user, face_data = encodings)
                 
-                return render(request,'login.html')
+                return render(request,'login')
                 
                 
         return render(request,'register.html')
