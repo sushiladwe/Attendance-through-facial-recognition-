@@ -26,7 +26,7 @@ SECRET_KEY = '(wfd&zb+#8@83=ih*2rzo)xk2(^4sgujiyvnkld87&f55t@zl6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','facelogin935.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -73,9 +73,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.1/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -86,8 +83,6 @@ import dj_database_url
 db_from_env = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(db_from_env)
 
-# Password validation
-# https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -105,9 +100,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/2.1/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -119,17 +111,8 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.1/howto/static-files/
-
 STATIC_URL = '/static/'
-#STATICFILES_FINDERS = (
-#    "django.contrib.staticfiles.finders.FileSystemFinder",
-#    #"django.contrib.staticfiles.finders.AppDirectoriesFinder"
-#)
-# MEDIA_URL='/media/'
 
-# MEDIA_ROOT =os.path.join(BASE_DIR,'pages/media')
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
