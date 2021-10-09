@@ -26,7 +26,7 @@ SECRET_KEY = '(wfd&zb+#8@83=ih*2rzo)xk2(^4sgujiyvnkld87&f55t@zl6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1']
+ALLOWED_HOSTS = ['127.0.0.1','attendance-system935.herokuapp.com']
 
 
 # Application definition
