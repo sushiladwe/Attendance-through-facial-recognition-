@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login
 from pages.models import UserProfile,Attendance
 from datetime import datetime
-
+from django.db.models import Q
 from django.contrib import messages
 import os
 import pickle
@@ -89,6 +89,11 @@ def profile(request):
 def alert(request):
         return render(request,'registration/alert.html')
 
+def Attendee_list(request):
+     #obj = Attendance.objects.all.()      
+     obj1 = Attendance.objects.filter(a_time__date = datetime.today() ) 
+     obj2 = Attendance.objects.filter(~Q(a_time__date = datetime.today()) )  
+     return render(request,"A_list.html",{'obj1':obj1,'obj2':obj2 })
 
 def get_face_encoding_from_base64(base64String):
     
