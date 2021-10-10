@@ -28,7 +28,7 @@ class UserProfile(models.Model):
 
 #changed
 class Attendance(models.Model):
-    username = models.CharField(max_length=122)
+    username = models.CharField(max_length=122,primary_key=True,)
     a_time = models.DateTimeField()
  
     def __str__(self):
