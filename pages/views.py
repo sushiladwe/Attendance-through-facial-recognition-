@@ -9,16 +9,13 @@ from django.contrib import messages
 import os
 import pickle
 import time
-
 import base64
 import io
 from PIL import Image
 import json
 from django.urls import path, include
-
 import face_recognition
-import numpy as np
-import cv2 
+import numpy as np 
 
 
 def loginuser(request):
