@@ -75,21 +75,19 @@ def register(request):
                 user = User.objects.create_user(username,username,password)
                 user_profile = UserProfile.objects.create(user = user, face_data = encodings)
                 
-                return render(request,'login')
+                return render(request,'login.html')
                 
                 
-        return render(request,'register.html')
+        return render(request,'register.html',{})
                             
 def profile(request):
         return render(request,'profile.html',{})
 
-def alert(request):
-        return render(request,'registration/alert.html')
 
 def Attendee_list(request):
      #obj = Attendance.objects.all.()      
-     obj1 = Attendance.objects.filter(a_time__date = datetime.today() ) 
-     obj2 = Attendance.objects.filter(~Q(a_time__date = datetime.today()) )  
+     obj1 = Attendance.objects.filter(a_time__date = datetime.today()).order_by('-a_time') 
+     obj2 = Attendance.objects.filter(~Q(a_time__date = datetime.today())).order_by('-a_time') 
      return render(request,"A_list.html",{'obj1':obj1,'obj2':obj2 })
 
 def get_face_encoding_from_base64(base64String):
