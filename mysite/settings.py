@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
 from pathlib import Path
+import django_heroku
 from django.contrib.messages import constants as messages
 import os
 
@@ -26,7 +27,7 @@ SECRET_KEY = '(wfd&zb+#8@83=ih*2rzo)xk2(^4sgujiyvnkld87&f55t@zl6'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1','attendance-system935.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','attendance-system935.herokuapp.com',"*"]
 
 
 # Application definition
@@ -73,10 +74,20 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd8ejvb1ris8dj1',
+        'USER': 'omyixahzlwrliu',
+        'PASSWORD': '1f16a248c551f5b08f761c0be0cd0125d2eb362ab3c8ecaeb0288816e3019a45',
+        'HOST': 'ec2-18-211-194-36.compute-1.amazonaws.com',
+        'PORT': '5432'
     }
 }
 import dj_database_url
