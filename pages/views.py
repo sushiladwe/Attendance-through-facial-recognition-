@@ -75,7 +75,7 @@ def register(request):
                 user = User.objects.create_user(username,username,password)
                 user_profile = UserProfile.objects.create(user = user, face_data = encodings)
                 
-                return render(request,'login.html')
+                return render(request,'home.html')
                 
                 
         return render(request,'register.html',{})
