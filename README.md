@@ -1,12 +1,14 @@
-# Face-attendance System
+# HACKX 2021 by SCALAR
 
 <br/>
 <br/>
 
 <p align="center">
+
   <a href="https://face-attendance935.herokuapp.com/">
     <img src="https://avatars.githubusercontent.com/u/57796181?s=200&v=4" alt="Logo" width="150">
   </a>
+  <br/>
 </p>
 
 <br/>
