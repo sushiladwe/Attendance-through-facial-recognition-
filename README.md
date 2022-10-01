@@ -9,6 +9,12 @@
     <img src="https://avatars.githubusercontent.com/u/57796181?s=200&v=4" alt="Logo" width="150">
   </a>
   <br/>
+  <b>Theme - Education</b>
+  <br/>
+  <b> Project - Attendance through facial recognition system</b>
+  <br/>
+  <b>Team Name - March #<br/>
+Team Members - Ayush Yadav, Sushil Adwe</b>
 </p>
 
 <br/>
